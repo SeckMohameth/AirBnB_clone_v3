@@ -6,7 +6,7 @@ from flask import Flask, Blueprint, make_response, jsonify, request
 from os import getenv
 from flask_cors import CORS
 
-app = Flask(__name__, threaded=True)
+app = Flask(__name__)
 app.register_blueprint(a--_views)
 CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = TRUE
@@ -30,4 +30,4 @@ if __name__ == "__main__":
         env_var['host'] = getenv('HBNB_API_HOST')
     if getenv('HBNB_API_PORT'):
         env_var['port'] = int(getenv('HBNB_API_PORT'))
-    app.run(host=env_var.get('host'), port=env_var.get('port'))
+    app.run(host=env_var.get('host'), port=env_var.get('port')threaded=True)
