@@ -7,8 +7,8 @@ from os import getenv
 from flask_cors import CORS
 
 app = Flask(__name__)
-app.register_blueprint(a--_views)
-CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
+app.register_blueprint(app_views)
+cors = CORS(app, resources={"/*": {"origins": "0.0.0.0"}})
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = TRUE
 
 
@@ -25,9 +25,5 @@ def error_handler(error):
 
 
 if __name__ == "__main__":
-    env_var = {'host': '0.0.0.0', 'port': 5000}
-    if getenv('HBNB_API_HOST'):
-        env_var['host'] = getenv('HBNB_API_HOST')
-    if getenv('HBNB_API_PORT'):
-        env_var['port'] = int(getenv('HBNB_API_PORT'))
-    app.run(host=env_var.get('host'), port=env_var.get('port'), threaded=True)
+    app.run(host=getenv('HBNB_API_HOST', '0.0.0.0'),
+            port=int(getenv('HBNB_API_PORT', '5000')))
