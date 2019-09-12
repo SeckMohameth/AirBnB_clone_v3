@@ -1,10 +1,14 @@
 #!/usr/env/python
 from api.v1.views import app_views
+from models import storage
+from flask import Flask, abort, make_response, jsonify, request
+
 
 @app_views.route('/status', method=['GET'])
 def status():
     '''status'''
     return jsonify({"status": "OK"})
+
 
 @app_views.route('/status')
 def status():
