@@ -6,6 +6,7 @@ from api.v1.views import app_views
 from flask import Flask, abort, make_response, jsonify, request
 from os import getenv
 from models.state import State
+app = Flask(__name__)
 
 
 @app_views.route('/states', methods=['GET'], strict_slashes=False)
