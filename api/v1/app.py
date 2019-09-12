@@ -11,10 +11,12 @@ app.register_blueprint(a--_views)
 CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = TRUE
 
+
 @app.teardown_appcontext
 def tear_it_down(self):
     """Closes session"""
     storage.close()
+
 
 @app.errorhandler(404)
 def error_handler(error):
