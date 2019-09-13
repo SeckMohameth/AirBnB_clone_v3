@@ -1,7 +1,7 @@
 #!/usr/env/python
 from api.v1.views import app_views
 from models import storage
-from flask import Flask, abort, make_response, jsonify, request
+from flask import Flask, jsonify
 
 
 @app_views.route('/status', method=['GET'])
@@ -10,10 +10,10 @@ def status():
     return jsonify({"status": "OK"})
 
 
-@app_views.route('/status')
-def status():
+@app_views.route('/stats')
+def st_count():
     '''retrieves the number of each objects by type'''
-    stats = {
+    cl_count = {
         'amenities': storage.count('Amenity'),
         'cities': storage.count('City'),
         'places': storage.count('Place'),
@@ -21,4 +21,4 @@ def status():
         'states': storage.count('State'),
         'users': storage.count('User')
     }
-    return jsonify(stats)
+    return jsonify(cl_count)

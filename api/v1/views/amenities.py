@@ -9,7 +9,7 @@ from flask import Flask, abort, jsonify, request
 from models.amenity import Amenity
 
 
-@app_views.route('amenities', methods=['GET'], strict_slashes=False)
+@app_views.route('/amenities', methods=['GET'], strict_slashes=False)
 def get_amenities():
     """retrieve amenities list (var = a_list) from json"""
     a_list = [a_obj.to_dict() for a_obj in storage.all('Amenity').values()]
@@ -55,7 +55,7 @@ def create_amenity():
 @app_views.route('/amenities/<amenity_id>',
                  methods=['PUT'], strict_slashes=False)
 def update_amenity(amenities_id):
-    """update state obj with key value pair"""
+    """update amenity obj with key value pair"""
     if not request.get_json():
         return jsonify({"error": "Not a JSON"}), 400
     object = storage.get('Amenity', amenity_id)
