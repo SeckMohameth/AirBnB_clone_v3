@@ -8,14 +8,14 @@ from os import getenv
 from models.state import State
 
 
-@app_views.route('/api/v1/states', methods=['GET'], strict_slashes=False)
+@app_views.route('/states', methods=['GET'], strict_slashes=False)
 def get_state():
     """retrieve state list (var = st_list) from json"""
     st_list = [obj.to_dict() for obj in storage.all('State').values()]
     return jsonify(st_list)
 
 
-@app_views.route('/api/v1/states/<state_id>', methods=['GET'], strict_slashes=False)
+@app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
 def get_stateId(state_id):
     """retrieve state objects with id"""
     state = storage.get('State', state_id)
@@ -24,7 +24,7 @@ def get_stateId(state_id):
     return jsonify(state.to_dict())
 
 
-@app_views.route('/api/v1/states/<state_id>', methods=['DELETE'], strict_slashes=False)
+@app_views.route('/states/<state_id>', methods=['DELETE'], strict_slashes=False)
 def del_stateId(state_id):
     """delete state object if given state id"""
     state = storage.get('State', state_id)
@@ -35,7 +35,7 @@ def del_stateId(state_id):
     return jsonify({}), 200
 
 
-@app_views.route('/api/v1/states', methods=['POST'], strict_slashes=False)
+@app_views.route('/states', methods=['POST'], strict_slashes=False)
 def create_state():
     """create a dict from HTTP body request"""
     """new state object"""
@@ -49,7 +49,7 @@ def create_state():
     return jsonify(object.to_dict()), 201
 
 
-@app_views.route('/api/v1/states/<state_id>', methods=['PUT'], strict_slashes=False)
+@app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
 def update_state(state_id):
     """update state obj with key value pair"""
     if not request.get_json():
