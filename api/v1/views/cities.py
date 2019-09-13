@@ -7,14 +7,14 @@ from flask import Flask, abort, jsonify, request
 from models.city import City
 
 
-@app_views.route('/states/<state_id>/cities', methods=['GET'], strict_slashes=False)
+@app_views.route('/states/<state_id>/cities',
+                 methods=['GET'], strict_slashes=False)
 def get_city(state_id):
     """retrieve city list (var = st_list) from json"""
     state = storage.get('State', state_id)
     if state is None:
-        abort(404)    
+        abort(404)
     city_list = [obj.to_dict() for obj in state.cities]
-    
     return jsonify(city_list), 200
 
 
@@ -39,7 +39,8 @@ def del_city(city_id):
     return jsonify({}), 200
 
 
-@app_views.route('/states/<state_id>/cities', methods=['POST'], strict_slashes=False)
+@app_views.route('/states/<state_id>/cities',
+                 methods=['POST'], strict_slashes=False)
 def create_city(state_id):
     """create a dict from HTTP body request"""
     """new state object"""
