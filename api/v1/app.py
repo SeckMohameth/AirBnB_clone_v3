@@ -7,9 +7,9 @@ from os import getenv
 from flask_cors import CORS
 
 app = Flask(__name__)
-app.register_blueprint(a--_views)
+app.register_blueprint(app_views)
 CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
-app.config['JSONIFY_PRETTYPRINT_REGULAR'] = TRUE
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
 @app.teardown_appcontext
 def tear_it_down(self):
@@ -20,7 +20,6 @@ def tear_it_down(self):
 def errorhandle(error):
     """handle 404"""
     return make_response(jsonify({'error': 'Not found'}), 404)
-
 
 if __name__ == "__main__":
     env_var = {'host': '0.0.0.0', 'port': 5000}
