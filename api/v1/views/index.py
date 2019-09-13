@@ -1,16 +1,19 @@
 #!/usr/env/python
 from api.v1.views import app_views
-from flask import jsonify
+from models import storage
+from flask import Flask, jsonify
 
 @app_views.route('/status', methods=['GET'])
 def status():
     '''status'''
     return jsonify({"status": "OK"})
 
+
 @app_views.route('/stats')
-def stats():
+def st_count():
+
     '''retrieves the number of each objects by type'''
-    stats = {
+    cl_count = {
         'amenities': storage.count('Amenity'),
         'cities': storage.count('City'),
         'places': storage.count('Place'),
@@ -18,4 +21,4 @@ def stats():
         'states': storage.count('State'),
         'users': storage.count('User')
     }
-    return jsonify(stats)
+    return jsonify(cl_count)
